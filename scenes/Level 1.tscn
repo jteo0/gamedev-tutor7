@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b11q3fh2otvfv"]
+
+[ext_resource type="PackedScene" uid="uid://cyrhi5evcgrt2" path="res://scenes/Player.tscn" id="1_k06ri"]
+[ext_resource type="PackedScene" uid="uid://csehdjbd7k13f" path="res://scenes/World1.tscn" id="2_6wvwk"]
+[ext_resource type="PackedScene" uid="uid://b7dgy21bvjjug" path="res://scenes/Area Trigger.tscn" id="3_tirdk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sjt0"]
+albedo_color = Color(0.427451, 1, 0.207843, 1)
+
+[node name="Level 1" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_k06ri")]
+
+[node name="World 1" parent="." instance=ExtResource("2_6wvwk")]
+
+[node name="AreaTrigger" parent="." instance=ExtResource("3_tirdk")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.608179, -53.851)
+sceneName = "WinScreen"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034132, -0.460847, -53.8592)
+radius = 1.03374
+height = 0.0380639
+material = SubResource("StandardMaterial3D_3sjt0")

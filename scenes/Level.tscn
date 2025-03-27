@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxw1qjw0y1bq"]
+
+[ext_resource type="PackedScene" uid="uid://cyrhi5evcgrt2" path="res://scenes/Player.tscn" id="1_lkuld"]
+[ext_resource type="Script" path="res://scenes/Switch.gd" id="2_78i2n"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_lkuld")]
+
+[node name="Switch" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Switch"]
+script = ExtResource("2_78i2n")
+light = NodePath("../../OmniLight3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
