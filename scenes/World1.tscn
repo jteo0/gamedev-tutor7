@@ -1,12 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://csehdjbd7k13f"]
+[gd_scene load_steps=15 format=3 uid="uid://csehdjbd7k13f"]
 
 [ext_resource type="PackedScene" uid="uid://dd6mhao4xx2yj" path="res://scenes/ObjLamp.tscn" id="1_pafrb"]
+[ext_resource type="PackedScene" uid="uid://d4mv460h0tds2" path="res://assets/models/basic_bastardsword/basic_bastardsword.glb" id="2_30nlu"]
+[ext_resource type="Script" path="res://scenes/Collectible.gd" id="3_imrv3"]
+[ext_resource type="PackedScene" uid="uid://k756gjly8pp8" path="res://assets/models/donuts/donut1.glb" id="4_cwac3"]
+[ext_resource type="PackedScene" uid="uid://bv0qaesp7ceb5" path="res://assets/models/donuts/donut2.glb" id="5_su72r"]
+[ext_resource type="PackedScene" uid="uid://cdfrxesigc3m" path="res://assets/models/donuts/donut3.glb" id="6_pslll"]
+[ext_resource type="PackedScene" uid="uid://b4bluta5tm3o6" path="res://assets/models/donuts/donut4.glb" id="7_t7f5w"]
+[ext_resource type="PackedScene" uid="uid://b27qvki65xow3" path="res://assets/models/donuts/donut5.glb" id="8_r8kjn"]
+[ext_resource type="PackedScene" uid="uid://c7xy8xoti8tfx" path="res://assets/models/donuts/donut6.glb" id="9_bpgcj"]
+[ext_resource type="PackedScene" uid="uid://b7dgy21bvjjug" path="res://scenes/Area Trigger.tscn" id="10_2rehi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3sun"]
 albedo_color = Color(0.655259, 0.662009, 0.64072, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ve1tg"]
 albedo_color = Color(0.295867, 0.295866, 0.295866, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y0ibh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7kouv"]
+height = 0.0128006
+radius = 0.006075
 
 [node name="World 1" type="Node3D"]
 
@@ -110,3 +125,117 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199341, -1, -43.5415)
 use_collision = true
 size = Vector3(4, 1, 2)
 material = SubResource("StandardMaterial3D_ve1tg")
+
+[node name="basic_bastardsword" parent="." instance=ExtResource("2_30nlu")]
+transform = Transform3D(0.673961, 2.91024, 0.276173, -2.85515, 0.594453, 0.703385, 0.627616, -0.420856, 2.90327, 0, -0.154703, -8.39773)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="basic_bastardsword"]
+transform = Transform3D(0.926485, -10.3517, 3.60341, 10.05, -0.641051, -4.42558, 4.37474, 3.66497, 9.4037, -0.291354, -0.0889198, 0.0829849)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_bastardsword/Area3D"]
+transform = Transform3D(-0.0194874, 0.00376659, 0.00246053, -0.00338491, -0.0194801, 0.00301162, 0.00296374, 0.00251799, 0.0196183, -0.00280085, -0.0173352, -0.00434799)
+shape = SubResource("CylinderShape3D_y0ibh")
+
+[node name="Collectibles" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="donut1" parent="Collectibles" instance=ExtResource("4_cwac3")]
+transform = Transform3D(0.311159, 0.950356, -0.00159748, -0.950272, 0.311108, -0.0139749, -0.0127841, 0.00586646, 0.999901, -0.56459, -0.160299, -5.28072)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut1"]
+transform = Transform3D(11, -5.22356e-07, -2.98023e-08, 9.10717e-07, 11, 8.19564e-08, 1.49012e-08, -6.70552e-08, 11, -0.154381, 0.0992889, -0.101147)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut1/Area3D"]
+transform = Transform3D(1.2, -1.8056e-08, -1.11759e-09, 1.8056e-08, 1.2, 5.58792e-10, 1.11759e-09, -5.58792e-10, 1.2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="donut2" parent="Collectibles" instance=ExtResource("5_su72r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39508, -0.123489, -2.76299)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut2"]
+transform = Transform3D(11, -5.22356e-07, -2.98023e-08, 9.10717e-07, 11, 8.19564e-08, 1.49012e-08, -6.70552e-08, 11, -0.202496, 0.121277, -0.0432844)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut2/Area3D"]
+transform = Transform3D(1, 1.06581e-14, 6.66134e-16, -7.11552e-15, 0.979925, 0.199368, 1.11022e-16, -0.199368, 0.979925, 0, 0.00347439, 0.00154182)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="donut3" parent="Collectibles" instance=ExtResource("6_pslll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133139, -0.170826, -0.526328)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut3"]
+transform = Transform3D(11, -9.10717e-07, -1.49012e-08, 9.10717e-07, 11, 6.70552e-08, 1.49012e-08, -6.70552e-08, 11, -0.196166, 0.206403, 0.042525)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut3/Area3D"]
+transform = Transform3D(1.2, -1.8056e-08, -1.11759e-09, 1.8056e-08, 1.2, 5.58794e-10, 1.11759e-09, -5.58794e-10, 1.2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="donut4" parent="Collectibles" instance=ExtResource("7_t7f5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133139, -0.170826, -0.526328)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut4"]
+transform = Transform3D(11, -5.22356e-07, -2.98023e-08, 9.10717e-07, 11, 8.19564e-08, 1.49012e-08, -6.70552e-08, 11, -0.181021, 0.216756, 0.0177461)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut4/Area3D"]
+transform = Transform3D(1.23, -1.85074e-08, -1.14553e-09, 1.85074e-08, 1.23, 5.72763e-10, 1.14553e-09, -5.72764e-10, 1.23, -0.00253135, 4.65661e-10, 0)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="donut5" parent="Collectibles" instance=ExtResource("8_r8kjn")]
+transform = Transform3D(-0.784215, 0.174846, -0.595344, 0.583789, 0.532997, -0.612458, 0.210231, -0.827855, -0.520058, -0.322246, -0.0778942, -4.2237)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut5"]
+transform = Transform3D(11, 9.53674e-07, -2.38419e-07, 1.43051e-06, 11, 4.76837e-07, -2.38419e-07, 0, 11, -0.157341, 0.150995, -0.0820625)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut5/Area3D"]
+transform = Transform3D(1.2, 0, 0, 1.49012e-08, 1.2, 5.96046e-08, -2.98023e-08, 0, 1.2, 0.000101864, -2.27094e-05, 7.7337e-05)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="donut6" parent="Collectibles" instance=ExtResource("9_bpgcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.569502, -0.127056, 0)
+script = ExtResource("3_imrv3")
+collectible_path = NodePath(".")
+interaction_text = "Press [E] to pickup!"
+
+[node name="Area3D" type="Area3D" parent="Collectibles/donut6"]
+transform = Transform3D(11, -5.22356e-07, -2.98023e-08, 9.10717e-07, 11, 8.19564e-08, 1.49012e-08, -6.70552e-08, 11, -0.112345, 0.0992889, 0.00381334)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collectibles/donut6/Area3D"]
+transform = Transform3D(1.3, -1.95607e-08, -1.21072e-09, 1.95607e-08, 1.3, 6.0536e-10, 1.21072e-09, -6.0536e-10, 1.3, 0, 0, 0)
+shape = SubResource("CylinderShape3D_7kouv")
+
+[node name="DeathPit" parent="." instance=ExtResource("10_2rehi")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -12.5878, -16.7952)
+
+[node name="DeathPit2" parent="." instance=ExtResource("10_2rehi")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -12.5878, -26.7283)
+
+[node name="DeathPit3" parent="." instance=ExtResource("10_2rehi")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -12.5878, -37.1914)
+
+[node name="DeathPit4" parent="." instance=ExtResource("10_2rehi")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -12.5878, -47.9196)
+
+[connection signal="body_entered" from="basic_bastardsword/Area3D" to="basic_bastardsword" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut1/Area3D" to="Collectibles/donut1" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut2/Area3D" to="Collectibles/donut2" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut3/Area3D" to="Collectibles/donut3" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut4/Area3D" to="Collectibles/donut4" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut5/Area3D" to="Collectibles/donut5" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collectibles/donut6/Area3D" to="Collectibles/donut6" method="_on_area_3d_body_entered"]

@@ -1,43 +1,31 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyrhi5evcgrt2"]
 
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_wr4kp"]
+[ext_resource type="Script" path="res://scenes/RayCast.gd" id="2_cy7m5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a48i7"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b7v7t"]
 
-[sub_resource type="GDScript" id="GDScript_4orrs"]
-script/source = "extends RayCast3D
-
-var current_collider
-
-func _ready():
-	pass
-
-func _process(delta):
-	var collider = get_collider()
-
-	if is_colliding() and collider is Interactable:
-		if Input.is_action_just_pressed(\"interact\"):
-			collider.interact()
-"
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ba5xx"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q5pl1"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_wr4kp")
 speed = 7.0
+mouse_sensitivity = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_a48i7")
-
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.687632, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
-
-[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
-script = SubResource("GDScript_4orrs")
+shape = SubResource("CapsuleShape3D_b7v7t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_ba5xx")
+mesh = SubResource("CapsuleMesh_q5pl1")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998733, 0.00464749)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.262678, -0.964884, 0, 0.964884, 0.262678, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0, 0)
+script = ExtResource("2_cy7m5")

@@ -1,15 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b11q3fh2otvfv"]
+[gd_scene load_steps=11 format=3 uid="uid://b11q3fh2otvfv"]
 
 [ext_resource type="PackedScene" uid="uid://cyrhi5evcgrt2" path="res://scenes/Player.tscn" id="1_k06ri"]
 [ext_resource type="PackedScene" uid="uid://csehdjbd7k13f" path="res://scenes/World1.tscn" id="2_6wvwk"]
 [ext_resource type="PackedScene" uid="uid://b7dgy21bvjjug" path="res://scenes/Area Trigger.tscn" id="3_tirdk"]
+[ext_resource type="FontFile" uid="uid://cs223ptdo4nno" path="res://assets/fonts/Potato_sans-Bold.otf" id="4_8ees7"]
+[ext_resource type="Script" path="res://scenes/Switch.gd" id="5_gxwfe"]
+[ext_resource type="Script" path="res://scenes/GUI.gd" id="6_0dfwl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sjt0"]
 albedo_color = Color(0.427451, 1, 0.207843, 1)
 
-[node name="Level 1" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uadlt"]
 
-[node name="Player" parent="." instance=ExtResource("1_k06ri")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b733n"]
+albedo_color = Color(0.870588, 0, 0.0784314, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3w55"]
+
+[node name="Level 1" type="Node3D"]
 
 [node name="World 1" parent="." instance=ExtResource("2_6wvwk")]
 
@@ -22,3 +30,86 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034132, -0.460847, -53.8592
 radius = 1.03374
 height = 0.0380639
 material = SubResource("StandardMaterial3D_3sjt0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.124814, 0.99218, 0, -0.99218, 0.124814, 0, 38.5847, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_k06ri")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 0.15, 0, 0, 0, 1.5, -3.57818, -0.481236, -0.995351)
+script = ExtResource("5_gxwfe")
+light = NodePath("../DirectionalLight3D")
+interaction_text = "Press [E] to toggle the lights!"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_uadlt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_b733n")
+mesh = SubResource("BoxMesh_o3w55")
+
+[node name="GUI" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_0dfwl")
+
+[node name="InteractLabel" type="Label" parent="GUI"]
+unique_name_in_owner = true
+modulate = Color(0.95447, 0.942566, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -241.5
+offset_top = -65.0
+offset_right = 241.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_8ees7")
+theme_override_font_sizes/font_size = 48
+text = "Press [E] to interact!"
+
+[node name="Label" type="Label" parent="GUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -334.5
+offset_right = 334.5
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_8ees7")
+theme_override_font_sizes/font_size = 48
+text = "CLICK [I] TO OPEN THE INVENTORY"
+
+[node name="Inventory" type="MarginContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Inventory"]
+layout_mode = 2
+color = Color(0.175355, 0.184647, 0.554679, 1)
+
+[node name="InventoryLabel" type="Label" parent="GUI/Inventory"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_8ees7")
+theme_override_font_sizes/font_size = 48
+text = "INVENTORY: "
+horizontal_alignment = 1
