@@ -5,6 +5,7 @@
 <h3>Interactables</h3>
 <h3>Collectibles</h3>
 <h3>Inventory</h3>
+<h3>Text Labels</h3>
 <h3>Importing Models from Blender</h3>
 <h4>References:</h4>
 - fonts: https://www.dafont.com/theme.php?cat=102&page=2<br>
