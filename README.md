@@ -126,7 +126,7 @@ There are 2 types of lights used here, 10 OmniLight3D and DirectionalLight3D. Th
 <p>The lone object is a lamp made up with a CSGCombiner3D root node, 2 CSGCylinder3D nodes and one CSGPolygon node as children. The cylinders are adjusted to resemble the pole and base of the lamp, while the polygon makes up the head of the lamp. The whole thing has collision on, so the player collides with it.</p>
 
 <h3>Area Triggers</h3>
-The Area Trigger scene is an Area3D node with a CollisionShape3D that sends out a signal everytime the player enters it. It's used in game as a 'DeathPit' to make the player respawn if the fall into the pit, and the same principle is used by the collectibles, in that if the player collides with/enters their area, they get picked up and put into the inventory. The following is the code used for the AreaTrigger scene:<br>
+The Area Trigger scene is an Area3D node with a CollisionShape3D that sends out a signal everytime the player enters it. It's used in game as a 'DeathPit' to make the player respawn if the fall into the pit, and the same principle is used by the collectibles, in that if the player collides with/enters their area, they get picked up and put into the inventory. Also, at the end room, there's an area marked with a green 'platform' that has an area trigger on it. When the player enters that area trigger, it will lead to the WinScreen popping up, after which the player can click escape to exit the game. The following is the code used for the AreaTrigger scene:<br>
 
 ```py
 extends Area3D
